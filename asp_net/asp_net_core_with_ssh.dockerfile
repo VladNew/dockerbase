@@ -9,5 +9,5 @@ RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/s
 
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
-
+EXPOSE 22 80
 CMD ["/usr/sbin/sshd", "-D"]
