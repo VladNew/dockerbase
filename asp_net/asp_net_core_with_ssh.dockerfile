@@ -1,5 +1,5 @@
 #https://docs.docker.com/engine/examples/running_ssh_service/
-FROM ubuntu:16.04
+FROM microsoft/dotnet-samples:aspnetapp
 
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
