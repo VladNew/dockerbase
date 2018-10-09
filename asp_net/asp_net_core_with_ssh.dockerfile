@@ -4,11 +4,11 @@ FROM microsoft/dotnet-samples:aspnetapp
 ENV USER ubuntu
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
-RUN adduser --disabled-password --gecos "" $USER
-RUN adduser $USER sudo
-ADD authorized_keys /home/$USER/.ssh/authorized_keys
-RUN chown $USER /home/$USER/.ssh/authorized_keys
-RUN chown -R $USER:$USER /home/$USER/.ssh/authorized_keys
-RUN chmod 700 /home/$USER/.ssh/authorized_keys
+RUN adduser --disabled-password --gecos "" ubuntu
+RUN adduser ubuntu sudo
+ADD authorized_keys /home/ubuntu/.ssh/authorized_keys
+RUN chown ubuntu /home/ubuntu/.ssh/authorized_keys
+RUN chown -R ubuntu:ubuntu /home/ubuntu/.ssh/authorized_keys
+RUN chmod 700 /home/ubuntu/.ssh/authorized_keys
 EXPOSE 22
 CMD    ["/usr/sbin/sshd", "-D"]
