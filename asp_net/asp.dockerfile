@@ -1,3 +1,4 @@
+FROM microsoft/dotnet-samples:aspnetapp
 ENV USER ftpuser
 ENV PASS changeme
 
