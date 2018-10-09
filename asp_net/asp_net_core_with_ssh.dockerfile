@@ -1,13 +1,13 @@
 #https://docs.docker.com/engine/examples/running_ssh_service/
-FROM microsoft/dotnet-samples:aspnetapp
-
+#https://superuser.com/questions/844101/docker-login-via-ssh-always-asks-for-password
+ENV USER ubuntu
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
-RUN echo 'root:screencast' | chpasswd
-RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-
-
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
-EXPOSE 22 80
-CMD ["/usr/sbin/sshd", "-D"]
+RUN adduser --disabled-password --gecos "" $USER
+RUN adduser $USER sudo
+ADD authorized_keys /home/$USER/.ssh/authorized_keys
+RUN chown $USER /home/$USER/.ssh/authorized_keys
+RUN chown -R $USER:$USER /home/$USER/.ssh/authorized_keys
+RUN chmod 700 /home/$USER/.ssh/authorized_keys
+EXPOSE 22
+CMD    ["/usr/sbin/sshd", "-D"]
