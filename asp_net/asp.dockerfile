@@ -7,8 +7,8 @@ RUN apt-get update && \
     mkdir -p /var/run/vsftpd/empty
 
 RUN mkdir -p /var/log/supervisor
-
-#COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN mkdir -p /etc/supervisor/conf.d/
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD start.sh /usr/local/bin/start.sh
 ADD vsftpd.conf /etc/vsftpd.conf
 
